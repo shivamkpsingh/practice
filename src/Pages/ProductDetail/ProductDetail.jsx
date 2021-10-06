@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Merchant from "../../Components/Merchant/Merchant";
 import Navbar from "../../Components/Navbar/Navbar";
 import BigProduct from "../../Components/ProductDetails/BigProduct";
@@ -22,18 +22,19 @@ import ProductDetailData from "../../Components/ProductDetails/ProductDetailData
 import smallProduct from "../../Json/smallProduct";
 
 const ProductDetail = () => {
+  const [productImage, setProductImage] = useState(0)
   return (
     <div className="productDetail">
       <Navbar />
       <div className="productDetail__section  flex  md:flex-row flex-col  md:mt-6">
         <div className="productDetail__data  w-full sm:w-full  md:w-5/6 px-2  flex flex-col sm:flex-row lg:px-10">
           <div className="productDetails__dataLeft flex flex-col  w-full sm:w-1/2">
-            <BigProduct />
+            <BigProduct displayImage={smallProduct[productImage].img} />
             <div className="flex  productDetail__middle overflow-x-scroll">
-              {smallProduct.map((props) => {
+              {smallProduct.map((props, index) => {
                 return (
                   <div>
-                    <SmallProduct key={props.id} imgUrl={props.img} />
+                    <SmallProduct key={props.id} imgUrl={props.img} id={index} setImage={setProductImage} />
                   </div>
                 );
               })}
